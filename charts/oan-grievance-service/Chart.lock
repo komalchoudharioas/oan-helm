@@ -1,6 +1,6 @@
 dependencies:
-- name: erpnext
-  repository: https://helm.erpnext.com
-  version: 8.0.89
-digest: sha256:d66d7ee9d550a50152496c65a9061ad5db0b7793d0823b1497c695e5e7a5644b
-generated: "2026-10-23T12:15:20.630965+05:30"
+- name: frappe-service
+  repository: ""
+  version: 8.0.91-oan.1
+digest: sha256:ad5d801306cb229226c8e7855694f4bdf801bac22ba1a1a7535b56b095dfbdf2
+generated: "2026-11-11T13:18:21.282622+05:30"

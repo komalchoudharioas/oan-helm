@@ -543,5 +543,133 @@
   "openg2p-farmer-registry-1.0.0-dev.22.tgz": {
     "sha256": "a7ce5527498f1dae70ca342e0808b179b441740adca0a66399607dc2b4db0f9c",
     "sourceSha256": "d9e87af4ec9ff42cf8e1ccdb1a81272bb7034d17b51f922e5646078613073181"
+  },
+  "oan-sandbox-1.0.0-dev.17.tgz": {
+    "sha256": "2bf8351418b01438640417d395b5f11ff698093548371affac338a0105b406a4",
+    "sourceSha256": "bc16d152e2fc4230ffb9f96cb6beac5d2711db169f26f54ba30e23b03130665f"
+  },
+  "openg2p-cropsown-registry-1.0.0-dev.21.tgz": {
+    "sha256": "7fd4b4d5255df3821e54428569e16b7c960bf12021e3d7cf8a6633f9de0f6b20",
+    "sourceSha256": "d566ae1d92cbde95110f06fe5119f6e6f7a3f035208eaaf02b3bc6627d736b88"
+  },
+  "openg2p-da-registry-1.0.0-dev.21.tgz": {
+    "sha256": "8e36893d6234769bb0540a848c8c4c2ed5b5d3ad8b74f37ed827f1346aafd586",
+    "sourceSha256": "2f204d3331964d5f4792c7c999909a1e98ef6f285e05ba90fc86f11a24146401"
+  },
+  "openg2p-farmer-registry-1.0.0-dev.23.tgz": {
+    "sha256": "150c8e0d69389741f7863c8e9d003860d677529281a653c55d4f0f3254767bd9",
+    "sourceSha256": "b499b7feeae50e7275e2b1c83eb8501ca659d6cb8d2b9ca3ed5cca31d08f35eb"
+  },
+  "openg2p-livestock-registry-1.0.0-dev.23.tgz": {
+    "sha256": "1d6cea87102cc38712c45611edb4c73fd6643ef2d5170fd0cfbcbf5f569728f1",
+    "sourceSha256": "c9b5dbb59ef8a97c7bd3a4bde7678445231d5d770979e6797c6da29790527b46"
+  },
+  "openg2p-da-registry-1.0.0-dev.22.tgz": {
+    "sha256": "c8c379dcbcf225a3cffbc5ce2ad965b647724554c6bb5e73b5ae6358e99f7a46",
+    "sourceSha256": "163630ba7b7fe8c05e5090b81f99f45ab4f9ad9dd5338ad9eee940d0c6974a7c"
+  },
+  "oan-a2c-0.1.0-dev.2.tgz": {
+    "sha256": "a152cb29b20b862d4c3872df802f637e3e357c63fb02abeb5b87aab4ca8e33b1",
+    "sourceSha256": "ee8ec8f9173c622d421f69216687f6b6f5a3be74b483ddcab10d172be6305c54"
+  },
+  "oan-grievance-service-0.1.0-dev.2.tgz": {
+    "sha256": "0ee2fa44b0dee66d6f8251cc3b2091c9157ef9aef41fb190a4bdbe719438c4f4",
+    "sourceSha256": "d7e87a4e88c81decb1393ea1af47aeebebb853c709543cc1c726ea50e03e89a2"
+  },
+  "oan-sandbox-1.0.0-dev.18.tgz": {
+    "sha256": "5ecf3219a314452f8359e2bb22440c9ddf0e5187dc5ed4f5a9def11b1b46995e",
+    "sourceSha256": "24f504b78da8b18a4fcc5ce24400fa9ac2a2619adcd7b4e362dfd40c3a59a644"
+  },
+  "openg2p-commons-services-1.0.0-dev.36.tgz": {
+    "sha256": "a58262ef11a4060788a44dd55ecad9899ab26ca4f9a7e7c874a01b6cf97583dc",
+    "sourceSha256": "6155a0ea6aace5b80d0b9c4cee8ecf385cbaeb8206aa6825c6c1b23aaa5722cc"
+  },
+  "openg2p-cropsown-registry-1.0.0-dev.22.tgz": {
+    "sha256": "1bbdee717c1c1daf954f534ac67b822c0e3c8d5e6e401155c3731399fafb18fc",
+    "sourceSha256": "5f2064599fbf170e935c4faa7a2983dfe0a429e545cf482b04d8e9c8b991bd91"
+  },
+  "openg2p-da-registry-1.0.0-dev.23.tgz": {
+    "sha256": "409288e5d7d1eed8168ebe93f379ff6d75413ba5690ec24fdd97ef193d918baf",
+    "sourceSha256": "b5f8af97c7302319303c630bf778a0d3ba9725f66acfdaad4f80bf312875ca53"
+  },
+  "openg2p-farmer-registry-1.0.0-dev.24.tgz": {
+    "sha256": "4f180e81afbc97ce48624c49ab6004ff26ad203a93fed8904cf8c4bbdb7055a3",
+    "sourceSha256": "84d15a47e6530a9b4287bf5c4a78a5997385dd0d6fb21ef16a0f34c4e51ae7d8"
+  },
+  "openg2p-livestock-registry-1.0.0-dev.24.tgz": {
+    "sha256": "a6f7e79a38b6ac2d177750addc077334333cb95b1db3657de26607842289ae6a",
+    "sourceSha256": "272cb4efad9cab978aa50b5e49d5f463d4a03ba68bf7dcbba798ee47a5d03ee7"
+  },
+  "oan-a2c-0.1.0-dev.3.tgz": {
+    "sha256": "fe862c4d9f3eb56679b504bebad9134373adcbf828e6a6805f70e96f611fdf32",
+    "sourceSha256": "6812635a898364caddb5df53739fb1c27984fb68ed742f4f893efa9ddf4a525f"
+  },
+  "oan-clamav-0.1.0-dev.1.tgz": {
+    "sha256": "f8aeecce8a8d6653dd80b61226e9d23a54df31b75e9043f6edf208add4043b30",
+    "sourceSha256": "afa43cc80409b87c19a2b5454bb9a708e7132d3db54311e2a6c51e0e4a237064"
+  },
+  "oan-grievance-service-0.1.0-dev.3.tgz": {
+    "sha256": "706e10b3e70b43feef06c2402abfc5caa537a1420ef38e99f2c784e63c96bc02",
+    "sourceSha256": "adb1f09727d85e0eb91c10d5bd9e091bf0188383d05f431c9b3d601692fcb681"
+  },
+  "openg2p-cropsown-registry-1.0.0-dev.23.tgz": {
+    "sha256": "31cd7ad60e9499a3d06f73dc8572c03fe7f7cf94296f51e5be34f1aaa762eca6",
+    "sourceSha256": "ec124a83ba1d4a3d75cb25e161c3beddb77b84d2a86886ffd66dbf5db1eaac34"
+  },
+  "openg2p-livestock-registry-1.0.0-dev.25.tgz": {
+    "sha256": "bc006e7a4ffc0c2779e0378e8ccfdbe898a4f94aee2f82136826c21bf0d8d224",
+    "sourceSha256": "e07b06079a9cb0632f961fea8a098593786dac39adc7faa6455c4317135c0755"
+  },
+  "openg2p-commons-services-1.0.0-dev.37.tgz": {
+    "sha256": "2edb482a4fe13f968c505177bfbcfdda6b3ab5d32fe54fb50d6d6dc145ab0330",
+    "sourceSha256": "50603e269e4ba3b5ded23b16445b025fe5d46f25afa4365fb416d6b3e47fbfef"
+  },
+  "openg2p-commons-services-1.0.0-dev.38.tgz": {
+    "sha256": "59de16162802f7a944bbcf207724b3e05d1fcad18815c8d5ddafa20f2afa1e7f",
+    "sourceSha256": "d1129be3ec80fb7fcdef6f240f90b3842afa6912a427b14e55e08f1252d2d3fc"
+  },
+  "oan-apisix-gateway-0.1.0-dev.1.tgz": {
+    "sha256": "b69b038eb9ab4eb7a4fd765a0d13cbdb5a32cd90179975854e171597b3235f42",
+    "sourceSha256": "82a5cb888e7583dc63eb9636cf8a108ceb3e5b5c2c8726cfb6029af9d22c56d5"
+  },
+  "oan-logging-0.1.0-dev.1.tgz": {
+    "sha256": "d11335f11adc50bff903e81d34852ec78a3a708e5c856373cd3312b140ec287c",
+    "sourceSha256": "058b1d592d65413f7d5e4586928ceb994759c6c9d1e8c652419c097de8ec95dc"
+  },
+  "openg2p-livestock-registry-1.0.0-dev.26.tgz": {
+    "sha256": "3b237e4405d8f0e9260953f61117f15985638d7d9270dad1625398a911f24610",
+    "sourceSha256": "30e6f4c2f7eff5e784c345f94245b129c9c2e6f0bb53a6c864ae9d4008ca1ec6"
+  },
+  "openg2p-commons-services-1.0.0-dev.39.tgz": {
+    "sha256": "5d006588c5f99e0c358d1484bfa5c1b365b7d64bb3e551f218cbbfe61907fa68",
+    "sourceSha256": "0fefd7e2e745518270f97a519de2457f5ff0484a51e6e734fc7a5bc7f2122f52"
+  },
+  "oan-a2c-service-0.1.0-dev.3.tgz": {
+    "sha256": "a4b5e572f669500771fb12448f36420af5af94b26657f8592e38956afe228861",
+    "sourceSha256": "4a3db2b8cd0a336bedc103deff067515869e7d4c0125b1b705356c4cbed58230"
+  },
+  "oan-a2c-ui-0.1.0-dev.1.tgz": {
+    "sha256": "34a34b97b368c2ff0a7e56236b81a9ffde679e60e9a10adc745dbeab12080b06",
+    "sourceSha256": "ea8ba306380b8d432a3987d3cb6c33b729052927c14eda9f18c39a5bfcf51d01"
+  },
+  "oan-frappe-common-0.1.0-dev.1.tgz": {
+    "sha256": "3fcd793ae806fed2b43bc9955ad01d0302ddb00b6e41f44cd4a6b55c3056d766",
+    "sourceSha256": "80fa0b5e805b9a09fb68730393207fe740c5d64bc0643bc558a9896fd7af2309"
+  },
+  "oan-grievance-service-0.1.0-dev.4.tgz": {
+    "sha256": "55119723a09d4f1a55023ea5d7419d06d5787ac8b7e1a69b0e1ebde261bd3bf6",
+    "sourceSha256": "5a3eb0c84034fc1559379ef639e00764048df8e458b1933dd7c0c4b6985320ce"
+  },
+  "oan-grievance-ui-0.1.0-dev.1.tgz": {
+    "sha256": "7962330adf0d7319c3dd560da22c4b41d2a94457797a4d5052185e1c4a6bf32e",
+    "sourceSha256": "3f85370af506ba87a79d0fc0921bd5af5e9c8360feadd47496715a163267c13e"
+  },
+  "openg2p-commons-services-1.0.0-dev.40.tgz": {
+    "sha256": "29281cb6b0be1cb65c6002fc8110868a1e42812a661a3edb61ec45e3e07465d2",
+    "sourceSha256": "a9325b3d542910e6736ac8cc6782ebec72debb3326210d09f649d9d1080e5fef"
+  },
+  "oan-frappe-common-0.1.0-dev.2.tgz": {
+    "sha256": "d3abf0b81564efb01066d0226660120b337c5d0db00a1be3ca20d2ef8ccdcee1",
+    "sourceSha256": "b6cafb73180dbcbf54b372649d340f7bde59a44c3dda26b274af186e11b1048a"
   }
 }

@@ -52,3 +52,16 @@ Published versions are never replaced or removed, and ECR keeps every image a pu
 3. Record the rollback and its reason in the Jira ticket.
 4. On a hands-free channel, the next pipeline run deploys again. Fix or revert the commit on the registry
    branch first, or hold the pipeline.
+
+## Staging dashboards
+
+`scripts/ci/deliver_staging_dashboards.sh` installs the dashboard UIs and `oan-dashboards` from
+`environments/staging/values/*-dashboard.yaml` and `oan-dashboards.yaml`. Each is its own Helm release, so roll one back
+with `helm rollback <release> -n <namespace>`. The dashboard API of a registry is part of the registry release.
+
+## Staging Farmer connector
+
+`scripts/ci/deliver_staging_farmer_connector.sh` installs `farmer-connector-credentials` and then
+`farmer-registry-connector` in namespace `farmer`. Roll back the connector with
+`helm rollback farmer-registry-connector -n farmer`. Leave the credentials release in place: its
+Secrets are kept on purpose, and the signing key is registered in Partner Manager.

@@ -11,15 +11,15 @@ different for A2C.
 
 | | Grievance | A2C |
 |---|---|---|
-| Chart | [charts/oan-grievance-service](../charts/oan-grievance-service) | [charts/oan-a2c](../charts/oan-a2c) |
+| Chart | [charts/oan-grievance-service](../charts/oan-grievance-service) | [charts/oan-a2c-service](../charts/oan-a2c-service) |
 | Release / namespace | `grievance` / `develop` | `a2c` / `a2c-develop` |
-| Frappe site | `develop.grievance.test` | `develop.a2c.test` |
-| Public host | `grievance-backend-dev.oanstaging.com` | `a2c-backend-dev.oanstaging.com` (confirm) |
+| Frappe site | `grievance-backend.development.oanstaging.com` | `a2c-backend.development.oanstaging.com` |
+| Public host | `grievance-backend.development.oanstaging.com` | `a2c-backend.development.oanstaging.com` (confirm) |
 | Node port in the app cluster | 30800 (web), 30900 (socket.io) | 30810 (web) |
 | Image | `oan-frappe` | `oan/a2c` (ECR repository of the A2C Jenkinsfile) |
 | Extra workloads | ClamAV, four queue workers | none: A2C uses only the default, short and long queues |
 | Gateway routes | `oan-grievance-gateway`, namespace `grievance` | `oan-a2c-gateway`, namespace `a2c` |
-| Values | [oan-grievance-service.yaml](../environments/dev/values/oan-grievance-service.yaml) | [oan-a2c.yaml](../environments/dev/values/oan-a2c.yaml), [oan-a2c-gateway.yaml](../environments/dev/values/oan-a2c-gateway.yaml) |
+| Values | [oan-grievance-service.yaml](../environments/dev/values/oan-grievance-service.yaml) | [oan-a2c-service.yaml](../environments/dev/values/oan-a2c-service.yaml), [oan-a2c-gateway.yaml](../environments/dev/values/oan-a2c-gateway.yaml) |
 
 APISIX tells the two apart by hostname: every route lists its app's `hosts`, and both
 apps serve `/v1/auth/*`, so the host is the only separator. An unknown host gets
@@ -46,7 +46,8 @@ Created by hand, never in values files.
 | `oan-a2c-openg2p` | A2C | `a2c-develop` | `username`, `password` | Optional: OpenG2P portal agent login |
 | `oan-a2c-sentry` | A2C | `a2c-develop` | `dsn` | Optional: Sentry DSN |
 | `oan-a2c-tls` | gateway | `a2c` | `tls.crt`, `tls.key` | Certificate APISIX serves for the host |
-| `a2c-openg2p-consent-webhook`, `a2c-telco-ivr-lead-gateway`, `a2c-oan-dashboards` | gateway | `a2c` | `key` | Partner and dashboard API keys, one Secret per consumer |
+| `a2c-openg2p-consent-webhook`, `a2c-oan-dashboards` | gateway | `a2c` | `key` | Partner and dashboard API keys, one Secret per consumer |
+| `oan-ivr-vendor` | gateway | `apisix` | `key` | Telco IVR vendor API key, shared with grievance. Read by the `oan-ivr-vendor` ApisixConsumer in `apisix.yaml` `extraDeploy` |
 | `a2c-frappe-service-credential` | gateway | `apisix` | `authorization` | `token <api_key>:<api_secret>` of the login-disabled Frappe service user. The partner routes put it in `Authorization`. |
 
 The service user is a Frappe user on the A2C site with an API key and secret. Create it
@@ -64,9 +65,8 @@ openssl genrsa -out jwt_v1.pem 2048
 kubectl -n a2c-develop create secret generic oan-a2c-jwt --from-file=jwt_v1.pem=jwt_v1.pem
 rm jwt_v1.pem
 
-helm dependency build charts/oan-a2c
-helm upgrade --install a2c charts/oan-a2c -n a2c-develop \
-  -f environments/dev/values/oan-a2c.yaml \
+helm upgrade --install a2c charts/oan-a2c-service -n a2c-develop \
+  -f environments/dev/values/oan-a2c-service.yaml \
   --set-string frappe.image.tag=<develop-build> \
   --set-string frappe.dbHost=<mariadb host> \
   --wait --wait-for-jobs --timeout 25m
@@ -84,7 +84,7 @@ checkout at the deployed commit:
 
 ```sh
 helm upgrade --install oan-a2c-gateway <oan_a2c>/apisix/k8s -n a2c \
-  -f environments/dev/values/oan-a2c-gateway.yaml \
+  -f environments/dev/values/gateway-common.yaml -f environments/dev/values/oan-a2c-gateway.yaml \
   --set "web.externalHosts={<A2C node private IP>}" --wait
 ```
 
@@ -93,7 +93,7 @@ Point DNS for the A2C host at the gateway node.
 ## 4. Check
 
 ```sh
-H=https://a2c-backend-dev.oanstaging.com
+H=https://a2c-backend.development.oanstaging.com
 curl -si -X POST $H/v1/auth/login -H 'Content-Type: application/json' -d '{}' | head -3   # 400: reached A2C, no health route exists
 curl -si -X POST $H/v1/webhooks/consent-data | head -3    # 401: no partner key
 ```
@@ -127,13 +127,13 @@ Same releases and values on the one local cluster, as in
 
    Tag it `379220350808.dkr.ecr.ap-south-1.amazonaws.com/oan/a2c:develop` and install with
    `frappe.image.tag=develop`.
-2. **Certificate:** sign a second certificate for `a2c-backend-dev.oanstaging.com` with the
+2. **Certificate:** sign a second certificate for `a2c-backend.development.oanstaging.com` with the
    same local CA, and create `oan-a2c-tls` in namespace `a2c`.
 3. **Routes:** `--set "web.externalHosts={<node IP>}"` (for example `192.168.139.2`).
 4. **`/etc/hosts`:** a line for the A2C host next to the grievance one.
 5. **Memory:** grievance and A2C together, with Rancher, overload an 8 GB Docker VM
    (load average above 30). Probes then time out, and a first install fails with
-   "Connection refused" to `a2c-valkey-cache:6379`. Stop the k3d Rancher cluster
+   "Connection refused" to `a2c-redis-cache-master:6379`. Stop the k3d Rancher cluster
    (`k3d cluster stop rancher`) and scale `grievance-clamav` to 0 while installing, or
    give OrbStack more memory (`orb config set memory_mib 12288`).
 6. **A failed first install cannot be resumed:** the create-site job treats an existing

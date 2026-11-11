@@ -1,9 +1,9 @@
-# COSS refactor candidate ownership and location support
+# OAN refactor candidate ownership and location support
 
 Crop and Livestock core charts and all three registry dashboard release charts
 are maintained here. Registries consume a commit, chart version and archive
 SHA-256; they do not resolve dependencies or mutate chart versions in Jenkins.
-Dashboard applications retain independent COSS source repositories and
+Dashboard applications retain independent OAN source repositories and
 registry-owned CI, ECR, releases, authentication and reporting views.
 
 Candidate 1.0.0-dev.11 keeps the registry platform at rc.557 and incorporates
@@ -26,7 +26,7 @@ ETH-OAN with agriculture is the intended configuration; existing data must not b
 replaced by a demo seed.
 
 Upstream's develop.118 seed image carries only ETH and XKM, so `geoSeed.image` pins
-`ghcr.io/asmitonweb/master-data-db-seed:0.0.0-develop.118-oan.1` by digest: the
+`379220350808.dkr.ecr.ap-south-1.amazonaws.com/openg2p/commons/master-data-db-seed` (built by the openg2p-data Jenkins pipeline) by digest: the
 upstream image, by digest, with `/openg2p-data` replaced by the OAN openg2p-data
 fork at the commit recorded in `releases/1.0.0-dev.11.yaml`. Its loader, scripts
 and packages are upstream's, byte for byte. The fork builds it from

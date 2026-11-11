@@ -21,7 +21,8 @@ global:
   cookieDomain: .oanstaging.com
   iamUrl: https://staff-iam.oanstaging.com
   iamServiceUrl: http://commons-services-iam-staff-portal-api.commons.svc.cluster.local
-  masterDataHostname: master-data.oanstaging.com
+  # Tile URL (see the chart's values.yaml); the API keeps master-data.*.
+  masterDataHostname: master-data-ui.oanstaging.com
   masterDataUiHostname: master-data-ui.oanstaging.com
   masterDataApiUrl: http://commons-services-master-data-api.commons.svc.cluster.local
   aweHostname: awe.oanstaging.com
@@ -42,7 +43,7 @@ openg2p-inji-certify:
       gateway: istio-system/staging
 master-data:
   global:
-    masterDataHostname: master-data.oanstaging.com
+    masterDataHostname: master-data-ui.oanstaging.com
     masterDataUiHostname: master-data-ui.oanstaging.com
   # Staging Commons is upgraded in place, like New Dev: its master_data database holds the
   # legacy catalogue (4 levels, 21053 geography values), which Master Data migrates on
@@ -50,15 +51,32 @@ master-data:
   # them at once. geo stays false: the pack's level ids differ from the migrated catalogue,
   # so loading it fails on the unique level mnemonic and stops the upgrade at this hook.
   # Set geo true only for a fresh Commons with an empty master_data database.
-  # Sample data stays off.
+  # samples: the pack's sample people (g2p_sample_individuals/households), which the
+  # registries' sample loaders read from Master Data /samples. Staging only; the chart
+  # default stays false. The load is an upsert (a re-run changes nothing). The people
+  # sit on the pack's P-codes (ET01010102 ...), so until staging's geography is the
+  # pack's, the seed warns that they are not in g2p_geo_level_values.
+  # 10 Nov 2026 geography cutover (ASMIT approved): the legacy master_data database is
+  # renamed to master_data_archive_20261110 and an empty master_data is created, so this
+  # upgrade is a first load of the ETH-OAN pack: geography on the pack's P-codes, code
+  # lists and sample people, published at once. It ran on 11 Nov 2026 (commons-services
+  # revision 19: 1 published version, 21,037 units). geo is false again so later upgrades
+  # only upsert code lists and samples; the archive database stays as the record.
+  # The image is the seed build with CROP_DISEASE (release record 1.0.0-dev.39); staging
+  # still runs chart 1.0.0-dev.35, whose default seed image is older.
   geoSeed:
     enabled: true
     publishInitial: true
     autoPublish: true
+    # Repository as well as tag: the release's saved values still name the old GHCR build,
+    # which has no image with this digest.
+    image:
+      repository: 379220350808.dkr.ecr.ap-south-1.amazonaws.com/openg2p/commons/master-data-db-seed
+      tag: f929965ce2a9-mds-e569a59b@sha256:27520bf4706809a30a8aacdc5372e22310c81972dd04ba9d12a68d281c8b068a
     load:
       geo: false
       codelists: true
-      samples: false
+      samples: true
   masterDataUi:
     iamPublicUrl: https://staff-iam.oanstaging.com
     envVars:
@@ -67,6 +85,7 @@ master-data:
       virtualservice:
         gateway: istio-system/staging
   masterDataAPI:
+    hostname: master-data.oanstaging.com
     istio:
       virtualservice:
         gateway: istio-system/staging
@@ -237,3 +256,15 @@ consentPartnerPortal:
   enabled: true
   virtualService:
     gateway: istio-system/staging
+
+# IAM beneficiary portal API, as on New Dev. Login provider seeding stays off until a
+# Fayda/eSignet client and signing key exist.
+iamBenePortalApi:
+  enabled: true
+  virtualService:
+    enabled: true
+    host: bene-iam.oanstaging.com
+    gateway: istio-system/staging
+  loginProvider:
+    seed: false
+    defaultRedirectUri: https://bene-portal.oanstaging.com

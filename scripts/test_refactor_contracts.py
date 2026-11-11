@@ -32,6 +32,15 @@ class RefactorContracts(unittest.TestCase):
         self.assertFalse(values['geoSeed']['load']['samples'])
         self.assertFalse(values['geoSeed']['autoPublish'])
 
+    def test_only_staging_loads_the_pack_sample_people(self):
+        load = lambda env: yaml.safe_load((ROOT/f'environments/{env}/values/commons-services.yaml').read_text(
+            encoding='utf-8'))['master-data']['geoSeed']['load']
+        self.assertTrue(load('staging')['samples'])
+        self.assertFalse(load('dev')['samples'])
+        # Neither loads geography on upgrade; staging's one-time cutover load ran on 11 Nov 2026.
+        self.assertFalse(load('dev')['geo'])
+        self.assertFalse(load('staging')['geo'])
+
     def test_seed_image_is_the_recorded_eth_oan_build(self):
         # The newest release-train manifest that records the seed image.
         manifests = sorted(ROOT.glob('releases/1.0.0-dev.*.yaml'),key=lambda p:int(p.stem.rsplit('.',1)[1]),reverse=True)
@@ -57,7 +66,7 @@ class RefactorContracts(unittest.TestCase):
                 (fixture/'templates').mkdir()
                 # Render only the reporting API template, without registry workloads.
                 # The real chart gate is neither edited nor bypassed for deployment.
-                for name in ('_coss.tpl','_reporting.tpl','dashboard-api.yaml'):
+                for name in ('_oan.tpl','_reporting.tpl','dashboard-api.yaml'):
                     shutil.copyfile(source/'templates'/name,fixture/'templates'/name)
                 (fixture/'Chart.yaml').write_text('apiVersion: v2\nname: auth-contract\nversion: 1.0.0+test\n')
                 values = yaml.safe_load((source/'values.yaml').read_text(encoding='utf-8'))
